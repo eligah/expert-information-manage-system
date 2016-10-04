@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block css %}
+    {% load staticfiles %}
+    <link href="{% static 'expert_system/css/log_reg.css' %}" rel="stylesheet">
+{% endblock %}
+{% block nav %}
+    {% include 'mnav.html' %}
+{% endblock %}
+{% block content %}
+    {% include 'changepsw.html' %}
+{% endblock %}
+{% block jsdown %}
+    {% include 'change_code.html' %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block css %}
+    {% load staticfiles %}
+    <link href="{% static 'expert_system/css/log_reg.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row line">
+            <div class="col-lg-6 col-lg-offset-3 form-box">
+                <div class="form-top">
+                    <h3 style="text-align: center">专家征集系统登录</h3>
+                </div>
+                <div class="form-body">
+                    <form action="" method="post">
+                        {% include 'form.html' %}
+                        <img onclick='ChangeCode();' id='imgCode' src='{% url "check_code" %}' title='点击更新'/>
+                        <p style="color: red">{{ error }}</p>
+                        <div class="row ">
+                            <input type="submit" class='col-lg-2 btn-success' value="登录">
+                            <input type="button" class=" btn-primary col-lg-offset-4" value="注册" onclick="turn_reg();">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block jsdown %}
+    {% include 'change_code.html' %}
+    <script>
+        function turn_reg() {
+            window.location.href += 'register/'
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block nav %}
+    {% include 'mnav.html' %}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="eval_field">评审领域</label>
+                    <select id="eval_field" class="form-control">
+                        <option>" "</option>
+                        <option>高校教育评估</option>
+                        <option>高职教育评估</option>
+                        <option>中职教育评估</option>
+                        <option>中学教育评估</option>
+                        <option>小学教育评估</option>
+                        <option>幼儿园教育评估</option>
+                    </select>
+                </div>
+                <label for="eval_field">评审状态</label>
+                <select id="eval_field" class="form-control">
+                    <option>" "</option>
+                    <option>已通过</option>
+                    <option>已驳回</option>
+                    <option>审核中</option>
+                    <option>已终止</option>
+                </select>
+                <button class="btn btn-default">查询</button>
+            </form>
+        </div>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <th>专家编号</td>
+            <th>用户名</td>
+            <th>专家名</td>
+            <th>工作单位</td>
+            <th>联系电话</td>
+            <th>入库类型</td>
+            <th>状态</td>
+            <th>操作</td>
+            </thead>
+            {% for expert in experts %}
+                <tr></tr>
+                <td>2014012302021{{ forloop.counter }}</td>
+                <td><a>{{ expert.username }}</a></td>
+                <td>{{ expert.capacity.name }}</td>
+                <td>{{ expert.capacity.job.comp }}</td>
+                <td>{{ expert.capacity.contract.phone }}</td>
+                <td>注册</td>
+                <td>{{ expert.capacity.evaluate.status }}</td>
+                </tr>
+            {% endfor %}
+            <tbody>
+            <tr>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

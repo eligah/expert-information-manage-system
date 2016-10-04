@@ -1,0 +1,22 @@
+
+.line {
+    padding-bottom: 15px;
+}
+
+.form-top {
+    padding: 20px 0 20px 0;
+}
+
+.form-box {
+    margin-top: 50px;
+    border: 1px solid cornflowerblue;
+}
+
+.errorlist {
+    font-size: 10px;
+    color: red;
+}
+
+.errorlist li {
+    list-style-type: none;
+}

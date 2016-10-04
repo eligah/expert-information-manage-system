@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block nav %}
+    {% include 'mnav.html' %}
+{% endblock %}
+{%  block content %}
+<div class="container-fluid">
+    <h2 style="text-align: center">当前有<span style="color: red"> {{ elength }}</span>个专家待审核</h2>
+</div>
+{% endblock %}

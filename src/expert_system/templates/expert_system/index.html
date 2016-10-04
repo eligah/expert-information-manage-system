@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block nav %}
+    {% include 'nav.html' %}
+{% endblock %}
+{%  block content %}
+<div class="container-fluid">
+    <h2 style="text-align: center">填表说明</h2>
+    <ul class="col-lg-offset-4">
+        <li>1.带*为必填项。</li>
+        <li>2.证书编号和证书有效时间： 管理员审核通过后填写，用户不得自己填写。</li>
+        <li>3.出生日期：从日历中选择，用户不得自己填写。</li>
+        <li>4.工作经历的开始时间、终止时间： 从日历中选择，用户不得自己填写。</li>
+        <li>5.回避单位：用户曾经工作过的单位或者是正在工作的单位。</li>
+    </ul>
+</div>
+{% endblock %}

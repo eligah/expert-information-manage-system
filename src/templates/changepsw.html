@@ -1,0 +1,35 @@
+<div class="container-fluid">
+        <div class="col-lg-6 col-lg-offset-3">
+            <form class="login-form" role="form" action="" method="post">
+                <div class="row line">
+                    <label for="psw_old" class="col-lg-4">当前密码</label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control col-lg-4" id="psw_old">
+                    </div>
+                </div>
+                <div class="row line">
+                    <label for="psw_new" class="col-lg-4">新密码</label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control col-lg-4" id="psw_new">
+                    </div>
+                </div>
+                <div class="row line">
+                    <label for="psw_re" class="col-lg-4">确认密码</label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control col-lg-4" id="psw_re">
+                    </div>
+                </div>
+                <div class="row line">
+                    <label for="psw_yzm" class="col-lg-4">验证码</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="psw_yzm">
+                    </div>
+                </div>
+                <img onclick='ChangeCode();' id='imgCode' src='{% url "check_code" %}' title='点击更新'/>
+                <p style="color: red">{{ error }}</p>
+                <div class="row ">
+                    <input type="submit" class='col-lg-2 btn-success' value="修改">
+                </div>
+            </form>
+        </div>
+    </div>

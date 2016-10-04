@@ -1,0 +1,22 @@
+<nav class="navbar  navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class=" navbar-header">
+            <a class="navbar-brand" href="{% url 'index' %}">专家征集系统</a>
+        </div>
+        <ul class="nav navbar-nav ">
+            <li><a href="{% url 'enter_info' %}">专家信息录入</a></li>
+            <li><a href="{% url 'change_password' %}">修改密码</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <div class="btn-group">
+                {% if uname %}
+                    <a class="btn  small">{{ uname }}</a>
+                    <a class="btn btn-danger small " href=" {% url 'logout' %}">注销</a>
+                {% else %}
+                    <a class="btn btn-primary small" href=" {% url 'login' %}">登录</a></li>
+                {% endif %}
+            </div>
+    </div>
+    </ul>
+    </div>
+</nav>

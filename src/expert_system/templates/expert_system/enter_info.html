@@ -1,0 +1,346 @@
+{% extends 'base.html' %}
+{% block css %}
+    {% load staticfiles %}
+    <link href="{% static 'expert_system/css/bootstrap-datetimepicker.css' %}" rel="stylesheet">
+    <style>
+        .extra_text {
+            color: red;
+        }
+    </style>
+{% endblock %}
+{% block nav %}
+    {% include 'nav.html' %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="info_table">
+            <form role="form" method="post" action="">
+                <table align="left" class="table table-hover table-bordered" style="table-layout:fixed"
+                >
+                    <tbody>
+                    <tr class="info">
+                        <td colspan="4">基本信息</td>
+                    </tr>
+                    <tr>
+                        <td>专家证书编号:</td>
+                        <td></td>
+                        <td valign="top">状态:</td>
+                        <td valign="top"><span style="color: red"> {{ evalf.status }}</span></td>
+                    </tr>
+                    <tr>
+                        <td>证书有效时间:</td>
+                        <td>
+                        </td>
+                        <td valign="top" colspan="2" rowspan="4" style="text-align: center"><img src='{% url "photo" %}'></td>
+                    </tr>
+                    <tr>
+                        <td valign="top">专家姓名:</td>
+                        <td valign="top">
+                            {{ capf.name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">专家性别:</td>
+                        <td valign="top">
+                            {{ capf.sex }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">出生日期:</td>
+                        <td valign="top">
+                            <div class="input-append date form_datetime">
+                                {{ capf.birth }}
+                                <span class="add-on"><i class="icon-th"></i></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">政治面貌:</td>
+                        <td valign="top">{{ capf.politic }}</td>
+                        <td valign="top">证件类型:</td>
+                        <td valign="top">{{ capf.type_card }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">颁发机构:</td>
+                        <td valign="top">{{ capf.agency }}</td>
+                        <td valign="top">证件编号:</td>
+                        <td valign="top">{{ capf.card_num }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">最高学历:</td>
+                        <td valign="top">{{ eduf.edu }}</td>
+                        <td valign="top">最高学位:</td>
+                        <td valign="top">{{ eduf.degree }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">职称:</td>
+                        <td valign="top">{{ jobf.title }}</td>
+                        <td valign="top">证书编号:</td>
+                        <td valign="top">{{ eduf.Num }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">职务:</td>
+                        <td valign="top">{{ jobf.job }}</td>
+                        <td valign="top">从业时长:</td>
+                        <td valign="top">{{ jobf.time_len }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">是否退休:</td>
+                        <td valign="top">
+                            {{ jobf.retire }}
+                        </td>
+                        <td valign="top">是否兼职:</td>
+                        <td valign="top">
+                            {{ jobf.part }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">工作单位:</td>
+                        <td valign="top" colspan="3">{{ jobf.comp }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">详细通讯地址:</td>
+                        <td valign="top" colspan="3">{{ conf.address }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">邮政编码:</td>
+                        <td valign="top">{{ conf.post_num }}</td>
+                        <td valign="top">电子邮件:</td>
+                        <td valign="top">{{ conf.email }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">移动电话:</td>
+                        <td valign="top">{{ conf.phone }}</td>
+                        <td valign="top">家庭电话</td>
+                        <td valign="top">{{ conf.home }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">毕业院校及专业:</td>
+                        <td valign="top" colspan="3">{{ eduf.pro }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" rowspan="1">资格证书名及编号:</td>
+                        <td valign="top"><input type="text" class="form-control"></td>
+                        <td valign="top"><input type="text" class="form-control"></td>
+                        <td valign="top">
+                            <button type="button" class="btn btn-success add_liscence">添加
+                            </button>
+                            <button type="button" class="btn btn-danger del_liscence">删除</button>
+                        </td>
+                    </tr>
+                    <tr class='qualadd' style="display:none">
+                        <td valign="top">&nbsp;</td>
+                        <td valign="top">{{ qualf.q_name }}</td>
+                        <td valign="top">{{ qualf.num }}</td>
+                        <td valign="top">
+                            {#                            <button type="button" class="btn btn-success add_liscence">添加</button>#}
+                            <button type="button" class="btn btn-danger del_liscence">删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>评审领域</td>
+                        <td>{{ evalf.field }}</td>
+                        <td>
+                            <a data-toggle="modal" href="#choose_eval" class="btn btn-primary btn-large">选择评审领域</a>
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td colspan="4">
+                            <h3>评估评审经历<span><button class="btn btn-default">增加评估/评审经历</button></span></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <td>时间</td>
+                                <td>任务名称</td>
+                                <td>任务描述</td>
+                                <td>任务类型</td>
+                                <td>操作</td>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="input-append date form_datetime">
+                                            {{ evalef.time }}
+                                            <span class="add-on"><i class="icon-th"></i></span>
+                                        </div>
+                                    </td>
+                                    <td>{{ evalef.task }}</td>
+                                    <td>{{ evalef.description }}</td>
+                                    <td>{{ evalef.type }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger">删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td colspan="4">
+                            <h3>工作经历<span><button class="btn btn-default">增加工作经历</button></span></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table class="table table-hover table-bordered">
+                                <tr>
+                                    <th>起始时间</th>
+                                    <th>终止时间</th>
+                                    <th>工作单位</th>
+                                    <th>职务</th>
+                                    <th>证明人</th>
+                                    <th>操作</th>
+                                </tr>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="input-append date form_datetime">
+                                            {{ jobef.start }}
+                                            <span class="add-on"><i class="icon-th"></i></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-append date form_datetime">
+                                            {{ jobef.end }}
+                                            <span class="add-on"><i class="icon-th"></i></span>
+                                        </div>
+                                    </td>
+                                    <td>{{ jobef.company }}</td>
+                                    <td>{{ jobef.job }}</td>
+                                    <td>{{ jobef.witness }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger">删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td colspan="4">
+                            <h3>业务专长<span><h6>不超过300字</h6></span></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            {{ jobf.expertise }}
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td colspan="4">
+                            <h3>工作业绩<span><h6>不超过300字</h6></span></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            {{ jobf.achievement }}
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td colspan="4">
+                            <h3>回避单位<span><button class="btn btn-default">增加回避单位</button></span></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <td>单位名称</td>
+                                <td>是否工作单位</td>
+                                <td>操作</td>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{ recomf.com_name }}</td>
+                                    <td>{{ recomf.work }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger">删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td colspan="4">
+                            <h3>其他说明<span><h6>不超过300字</h6></span></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            {{ evalf.other }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="btn-group">
+                                <button id="btn-edit" value="编辑">编辑</button>
+                                <input type="submit" id="btn-save" value="保存">
+                                <input type="submit" id="btn-submit" disabled="disabled" value="提交">
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+            {#            <职称选择模态框></职称选择模态框>#}
+            <div class="modal fade" id="choose_eval" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close"
+                                    data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                选择评审领域(最多两项)
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <table align="left" class="table table-hover " style="table-layout:fixed"
+                            >
+                                <tbody>
+                                <tr>
+                                    <td><label class="checkbox">
+                                        <input type="checkbox" value="幼儿园教育评估">幼儿园教育评估
+                                    </label></td>
+                                    <td><label class="checkbox">
+                                        <input type="checkbox" value="小学教育评估"> 小学教育评估
+                                    </label></td>
+                                    <td><label class="checkbox">
+                                        <input type="checkbox" value="中学教育评估"> 中学教育评估
+                                    </label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="checkbox">
+                                        <input type="checkbox" value="中职教育评估"> 中职教育评估
+                                    </label></td>
+                                    <td><label class="checkbox">
+                                        <input type="checkbox" value="高职教育评估"> 高职教育评估
+                                    </label></td>
+                                    <td><label class="checkbox">
+                                        <input type="checkbox" value="高校教育评估"> 高校教育评估
+                                    </label></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-success acc_model" id="acc_model">确认</a>
+                            <a href="#" class="btn btn-danger" data-dismiss="modal">取消</a>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block jsdown %}
+    {% load staticfiles %}
+    <script src="{% static 'expert_system/js/bootstrap-datetimepicker.js' %}" type="text/javascript"></script>
+    <script src="{% static 'expert_system/js/enter_info.js' %}" type="text/javascript"></script>
+{% endblock %}
