@@ -1,0 +1,3 @@
+由于所有的数据存储都是通过调用django的api来实现的.
+主要逻辑在views.py,里面通过结构化的语言以及封装sql的查询语句的api来实现存取逻辑
+这里还是列出了创建表的sql语句(由django manage.py 导出)
